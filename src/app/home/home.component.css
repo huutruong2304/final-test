@@ -1,0 +1,22 @@
+.products {
+    list-style: none;
+    font-size: 15px;
+}
+
+.products li {
+    position: relative;
+    width: 500px;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+.badge {
+    font-size: inherit;
+    padding: 10px;
+    width: 50px;
+}
+
+.delete {
+    position: absolute;
+    right: -50px;
+}

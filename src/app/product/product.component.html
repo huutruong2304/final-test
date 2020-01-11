@@ -1,0 +1,26 @@
+<div class="text-center">
+    <h1 translate>List of all products</h1>
+</div>
+<div class="container d-flex justify-content-center">
+    <ul class="list-group">
+        <li *ngFor="let pd of products" class="list-group-item">
+            <a [routerLink]="['/detail',pd.id]" routerLinkActive="router-link-active">
+                <span class="badge">{{pd.id}}</span>
+                <span class="title">{{pd.title |sliceTitle}}</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- <div class="text-center">
+    <h1>Product</h1>
+</div>s
+<div class="container-fluid d-flex flex-wrap">
+    <div class="card m-1" style="width: 18rem;" *ngFor="let pd of products">
+        <div class="card-body">
+            
+            <h5 class="card-title">{{pd.title| sliceTitle}}</h5>
+            <p class="card-text">{{pd.body}}</p>
+            <a href="#" class="card-link">Details</a>
+        </div>
+    </div>
+</div> -->

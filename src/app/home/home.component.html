@@ -1,0 +1,14 @@
+<div class="text-center">
+    <h1 translate>Home</h1>
+</div>
+<div class="container d-flex justify-content-center">
+    <ul class='products'>
+        <li *ngFor="let pd of products" class="bg-light">
+            <a [routerLink]="['/detail',pd.id]" routerLinkActive="router-link-active">
+                <span class="badge">{{pd.id}}</span>
+                <span class="title">{{pd.title |sliceTitle}}</span>
+            </a>
+            <button class='btn btn-danger delete' (click)="delete(pd)">X</button>
+        </li>
+    </ul>
+</div>
