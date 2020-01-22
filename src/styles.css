@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    /* user-select: none; */
+    border-radius: 0 !important;
+}
+
+.gray {
+    color: #999999;
+}
+
+.gray-orange {
+    color: #999999;
+}
+
+.gray-orange:hover {
+    color: #f68872;
+}
+
+strong {
+    font-weight: bold;
+}
+
+.btn-transparent {
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.orange {
+    color: #f68872 !important;
+}
+
+.btn-transparent:hover {
+    color: #f68872 !important;
+}
+
+button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.my-btn {
+    padding: 10px 20px;
+    background-color: #f68872;
+    color: white;
+    font-size: 18px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    text-transform: uppercase;
+    transition: background-color ease-in 0.3s;
+}
+
+.my-btn:hover {
+    background-color: black;
+}
+
+input {
+    box-shadow: none !important;
+}

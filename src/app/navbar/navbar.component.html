@@ -1,0 +1,109 @@
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
+    <a class="navbar-brand" [routerLink]="['/']">CR7.</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']" translate>Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/products']" translate>Product</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/contact']" translate>Contact</a>
+        </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <label for="search"><i class="fa fa-search" aria-hidden="true"></i></label>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search product" aria-label="Search" translate id="searchInput" autocomplete="off">
+    </form>
+    <div class="form-inline ">
+        <div class="header-cart">
+            <button class="btn btn-transparent"><i class="fa fa-cart-plus" aria-hidden="true"></i><span class="badge badge-pill badge-danger">{{products.length}}</span></button>
+            <div class="cart-table">
+                <div class="cart-body">
+                    <div class="form-inline py-2" *ngFor="let product of products">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMPwJVK3M0ufE1mC4XbqapJstiMIcg9V-2oBXD3W4zGagMJo4-&s" alt="">
+                        <div class="price-qty">
+                            <h6 class="gray my-1">{{product.name}}</h6>
+                            <p class="m-0"><strong>{{product.price}} x {{product.qty}}</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="cart-total">
+                    <div class="d-flex justify-content-between">
+                        <p>Total:</p>
+                        <p><strong>95000</strong></p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="">View Cart</a>
+                        <a href="">check out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-user">
+            <button class="btn btn-transparent mx-2" (click)="showLoginTable()"><i class="fa fa-user-o" aria-hidden="true"></i></button>
+            <div class="user-table shadow-sm" *ngIf="isShowLogin">
+                <ul class="nav justify-content-center" id="myTab" role="tablist">
+                    <li class="nav-item ">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+                    </li>
+                </ul>
+                <div class="tab-content p-3" id="myTabContent">
+                    <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                        <form>
+                            <div class="form-group py-2">
+                                <h4 class="text-uppercase"><strong>Login in</strong> </h4>
+                                <p>If you are already registered, please log in.</p>
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control w-100" id="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control w-100" id="exampleInputPassword1">
+                            </div>
+                            <div class="form-group my-4 ">
+                                <button type="submit" class="btn btn-submit">Sign in</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                        <form>
+                            <div class="form-group py-2">
+                                <h4 class="text-uppercase"><strong>create an account</strong> </h4>
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="firstname">First name</label>
+                                <input type="text" class="form-control w-100" id="firstname">
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="lastname">Last name</label>
+                                <input type="text" class="form-control w-100" id="lastname">
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control w-100" id="email">
+                            </div>
+                            <div class="form-group py-2">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control w-100" id="exampleInputPassword1">
+                            </div>
+                            <div class="form-group my-4 ">
+                                <button type="submit" class="btn btn-submit">Create an account</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

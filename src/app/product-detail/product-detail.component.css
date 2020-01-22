@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.img-zoom-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 30px;
+}
+
+.img-zoom-result {
+    /* background-image: url("https://cdn.shopify.com/s/files/1/0042/9313/2377/products/6c_bcd7cf5b-406e-4de7-800b-8a7c3f69ba3d.jpg?v=1548820247"); */
+    border: 1px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+
+/* #myresult {
+    background-image: url("https://cdn.shopify.com/s/files/1/0042/9313/2377/products/6c_bcd7cf5b-406e-4de7-800b-8a7c3f69ba3d.jpg?v=1548820247");
+    background-position: -250px -150px;
+    background-size: 150%;
+    background-repeat: no-repeat;
+} */

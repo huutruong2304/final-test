@@ -17,6 +17,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '../assets/lang/','.json');
@@ -30,7 +32,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ContactComponent,
     LoginComponent,
     SliceTitlePipe,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FooterComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

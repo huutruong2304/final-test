@@ -8,7 +8,7 @@ import {Product} from '../interface/product'
   providedIn: 'root'
 })
 export class GetDataService {
-  private url = 'https://jsonplaceholder.typicode.com/posts';
+  private url = 'https://my-json-server.typicode.com/huutruong2304/demo/products';
   constructor(private http: HttpClient) { }
   // private data: Array<any>;
   getData(){

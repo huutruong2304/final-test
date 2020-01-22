@@ -1,0 +1,154 @@
+.navbar {
+    background-color: white;
+}
+
+.navbar-brand {
+    width: 20px;
+    text-align: left;
+    font-weight: bolder;
+    font-size: 30px;
+    padding: 20px 200px 20px 50px;
+}
+
+.nav-link {
+    margin: 0 15px;
+    padding: 2px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom ease-in 0.3s;
+}
+
+.nav-link:hover {
+    border-bottom: 2px solid #f68872;
+}
+
+.nav-item a {
+    padding: 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #999999;
+    transition: color ease-in 0.3s;
+}
+
+.nav-item a:hover {
+    color: #f68872;
+}
+
+.btn-transparent {
+    font-size: 25px;
+    position: relative;
+}
+
+.badge {
+    font-size: 10px;
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+#searchInput {
+    font-size: 15px;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.header-cart,
+.header-user {
+    position: relative;
+}
+
+.cart-table {
+    position: absolute;
+    top: 90%;
+    right: 50%;
+    background-color: #222222;
+    height: 600px;
+    min-width: 350px;
+    z-index: 10;
+    display: none;
+}
+
+.cart-body {
+    overflow-y: auto;
+    height: 80%;
+}
+
+.cart-table img {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
+}
+
+.price-qty {
+    margin: 0 10px;
+}
+
+.price-qty p {
+    color: white;
+}
+
+hr {
+    border-color: #999999;
+    margin: 0 10px;
+}
+
+.cart-total p {
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin: 0;
+}
+
+.cart-total a {
+    padding: 10px 20px;
+    background-color: black;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: background-color ease-in 0.3s;
+}
+
+.cart-total a:hover {
+    background-color: #4c4c4c;
+}
+
+.header-cart:hover .cart-table {
+    display: block;
+}
+
+.user-table {
+    position: absolute;
+    top: 90%;
+    right: 50%;
+    background-color: white;
+    min-width: 350px;
+    z-index: 5;
+    /* /display: block; */
+    /* border: 1px solid #999999; */
+}
+
+.header-user .nav-link {
+    border: 1px solid transparent;
+}
+
+.header-user .nav-item .active {
+    color: #f68872;
+    border-bottom: 2px solid #f68872;
+}
+
+.btn-submit {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    text-transform: uppercase;
+    transition: background-color ease 0.5s, color ease 0.5s;
+}
+
+.btn-submit:hover {
+    border-color: #f68872;
+    color: white;
+    background-color: #f68872;
+}

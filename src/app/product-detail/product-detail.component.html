@@ -1,25 +1,8 @@
 <div class="text-center">
     <h1>Product details</h1>
 </div>
-<div class="container d-flex justify-content-center">
-    <div class="card m-1" style="width: 18rem;">
-        <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">ID: {{product.id}}</h6>
-            <h5 class="card-title">{{product.title|titlecase }}</h5>
-            <p class="card-text">{{product.body}}</p>
-        </div>
-    </div>
+
+<div class="img-zoom-container">
+    <!-- <img id="mainImage" src="https://cdn.shopify.com/s/files/1/0042/9313/2377/products/6c_bcd7cf5b-406e-4de7-800b-8a7c3f69ba3d.jpg?v=1548820247" width="300" height="240" alt="Girl"> -->
+    <div id="myresult" class="img-zoom-result" style="background-image: url('{{product.urlImage}}');"></div>
 </div>
-<!-- <div class="text-center">
-    <h1>Product</h1>
-</div>s
-<div class="container-fluid d-flex flex-wrap">
-    <div class="card m-1" style="width: 18rem;" *ngFor="let pd of products">
-        <div class="card-body">
-            
-            <h5 class="card-title">{{pd.title| sliceTitle}}</h5>
-            <p class="card-text">{{pd.body}}</p>
-            <a href="#" class="card-link">Details</a>
-        </div>
-    </div>
-</div> -->
