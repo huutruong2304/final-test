@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { GetDataService } from '../services/get-data.service'
-import { fromEvent } from 'rxjs';
+import { of, fromEvent } from 'rxjs';
+import { Product } from '../interface/product'
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,39 +11,64 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  private zoomValue:number = 2;
-  product: any;
-  imageElement: HTMLElement;
-  constructor(private getDataService: GetDataService, private route: ActivatedRoute) { 
-   
+  productDetails: any ;
+  relatedProducts: Array<any>;
+  imageEle: HTMLElement;
+  qtyToCart:number;
+  isShowQuickView:boolean;
+  constructor(private getDataService: GetDataService, private route: ActivatedRoute) {
+    this.productDetails={};
+    this.relatedProducts=[];
+    this.qtyToCart = 1;
+    this.isShowQuickView=false;
   }
-
 
   ngOnInit() {
-    this.imageElement = document.querySelector("#myresult");
     this.route.paramMap.subscribe((params) => {
-      console.log('id: ' + params.get('id'));
-      this.getDataService.getById(params.get('id')).subscribe(value => {
+      // console.log('id: ' + params.get('id'));
+      this.getDataService.getById(params.get('id')).subscribe((value:Product) => {
         // console.log(value);
-        this.product = value;
-        this.imageElement.setAttribute("style",`background-image:url("${this.product.urlImage}");`);
+        this.productDetails = value;
       })
-    })
-    // this.imageElement = document.querySelector("#myresult");
-    // this.imageElement.setAttribute("style","background-image:url('"+"https://cdn.shopify.com/s/files/1/0042/9313/2377/products/6c_bcd7cf5b-406e-4de7-800b-8a7c3f69ba3d.jpg?v=1548820247"+"')");
-
-    fromEvent(document.querySelector('#myresult'), "mousemove").subscribe((x: MouseEvent) => {
-     this.imageElement.setAttribute("style","background-size:"+ this.zoomValue*100+"%");
-     this.imageElement.setAttribute("style","background-position: -"+x.offsetX*this.zoomValue+"px  -"+ x.offsetY*this.zoomValue+"px;");
-    })
-    fromEvent(document.querySelector('#myresult'),'mouseout').subscribe(()=>{
-     this.imageElement.removeAttribute("background-position");
-     this.imageElement.setAttribute("style","background-size: 100%");
-      //this.imageElement.removeAttribute("background-size");
+      this.getDataService.getAll().subscribe((value)=>{
+        this.relatedProducts= value;
+      })
     })
   }
 
+  changeQtyToCart(value: boolean){
+    switch (value) {
+      case true:
+        if(this.qtyToCart<this.productDetails.qty){
+          this.qtyToCart ++;
+        }
+        console.log(this.qtyToCart);
+        break;
+      case false:
+        if(this.qtyToCart>1){
+          this.qtyToCart--;
+        }
+        console.log(this.qtyToCart);
 
+        break;
+    }
+  }
 
+  passSlide(value:boolean, classCarousel:string='.slide-related-product',speed:number=400){
+    if(value){
+      document.querySelector(classCarousel).scrollBy(speed,0);
+    }
+    else{
+      document.querySelector(classCarousel).scrollBy(-speed,0);
+    }
+  }
 
+  getDetails(id:number){
+    this.isShowQuickView=false;
+   this.getDataService.getById(id).subscribe(product=>{
+    this.productDetails = product;
+    this.isShowQuickView=true;
+    console.log(this.isShowQuickView);
+   })
+  }
 }

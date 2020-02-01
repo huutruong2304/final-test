@@ -1,0 +1,23 @@
+.img-zoom-container {
+    position: relative;
+    border: none;
+}
+
+.img-zoom-result {
+    border: 1px solid #d4d4d4;
+    /*set the size of the result div:*/
+    width: 500px;
+    height: 500px;
+    cursor: pointer;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: none;
+}
+
+.img-array-container img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    cursor: pointer;
+}

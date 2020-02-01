@@ -14,7 +14,7 @@
     margin: 0 15px;
     padding: 2px 0;
     border-bottom: 2px solid transparent;
-    transition: border-bottom ease-in 0.3s;
+    /* transition: ease 0.3s; */
 }
 
 .nav-link:hover {
@@ -23,10 +23,10 @@
 
 .nav-item a {
     padding: 0;
-    font-size: 20px;
-    font-weight: bold;
-    color: #999999;
-    transition: color ease-in 0.3s;
+    font-size: 17px;
+    /* font-weight: bold; */
+    color: black;
+    transition: ease 0.2s;
 }
 
 .nav-item a:hover {

@@ -1,8 +1,197 @@
-<div class="text-center">
-    <h1>Product details</h1>
+<!-- zoom ảnh và chi tiết sản phẩm -->
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <!-- <div class="col-4"> -->
+        <p><span class="gray">Home &bull; Product &bull; </span>{{productDetails?.name}}</p>
+        <!-- </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-6 px-0 py-2">
+            <app-zoom-image [urlImages]="productDetails?.urlImage"></app-zoom-image>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5 infoProduct">
+            <h3> <strong class="text-capitalize m-0">{{productDetails?.name}}</strong></h3>
+            <small class="gray">SKU: #{{productDetails?.id}}</small>
+            <h5 class="py-2">
+                <span>${{productDetails?.price}}</span>
+                <span class="ml-5" *ngIf="productDetails?.qty===0"><i class="fa fa-times-circle" style="color: #FF4040;"></i><small class="p-1">Out of stock</small></span>
+                <span class="ml-5" *ngIf="productDetails?.qty!==0"><i class="fa fa-check-circle" style="color: #86c178;"></i><small class="p-1">Many in stock</small></span>
+            </h5>
+            <p>{{productDetails?.description}} nkjnaskjdna kjsndkjansdjka jnasndjkasn</p>
+            <hr>
+            <p><b class="text-uppercase">Category: </b>Fashion</p>
+            <p><b class="text-uppercase">Tags: </b>t-shirt, tee, star wars</p>
+            <div class="form-inline">
+                <button class="like-btn mx-1"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                <div class="input-quanity mx-1">
+                    <button (click)="changeQtyToCart(false)"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    <input type="text" value="{{qtyToCart}}" autocomplete="off">
+                    <button (click)="changeQtyToCart(true)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <button class="add-cart-btn mx-1">add to cart</button>
+            </div>
+            <button class="buy-now-btn mx-1 mt-3">Buy it now</button>
+            <img class="py-4" width="410" src="https://cdn.shopify.com/s/files/1/0042/9313/2377/files/PROD1_500x_5304580f-3ee3-4dcb-bf65-3ab34618626b_2048x.png?v=1538966659" alt="">
+        </div>
+    </div>
 </div>
 
-<div class="img-zoom-container">
-    <!-- <img id="mainImage" src="https://cdn.shopify.com/s/files/1/0042/9313/2377/products/6c_bcd7cf5b-406e-4de7-800b-8a7c3f69ba3d.jpg?v=1548820247" width="300" height="240" alt="Girl"> -->
-    <div id="myresult" class="img-zoom-result" style="background-image: url('{{product.urlImage}}');"></div>
+<!-- 3 tab description, features, reviews -->
+<div class="container" style="margin-top: 120px;">
+    <hr>
+    <ul class="nav nav-tabs border-0 d-flex justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active border-0" id="home-tab" data-toggle="tab" href="#description" role="tab" aria-controls="home" aria-selected="true">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link border-0" id="profile-tab" data-toggle="tab" href="#features" role="tab" aria-controls="profile" aria-selected="false">Features</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link border-0" id="contact-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="contact" aria-selected="false">Reviews</a>
+        </li>
+    </ul>
+    <hr class="mt-4">
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active gray" id="description" role="tabpanel" aria-labelledby="description-tab">
+            <p>
+                The main compartment of our bag is made using only two large pieces of 100% full-grain boot leather. Two outside pockets for quick access to gear. Shoulder straps are adjustable from both ends and flair out at the bottom to accommodate all body types.
+                Rivets at all stress points. The main compartment of our bag is made using only two large pieces of 100% full-grain boot leather. Two outside pockets for quick access to gear. Shoulder straps are adjustable from both ends and flair out
+                at the bottom to accommodate all body types. Rivets at all stress points
+            </p>
+            <div class="text-center">
+                <img class="py-2 w-25" src="{{productDetails?.urlImage[0]}}" alt="Photo">
+            </div>
+            <p>is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </p>
+        </div>
+        <div class="tab-pane fade gray" id="features" role="tabpanel" aria-labelledby="features-tab">
+            <p>is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
+                here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
+                infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+            </p>
+        </div>
+        <div class="tab-pane fade gray" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia,
+                looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33
+                of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
+                amet..", comes from a line in section 1.10.32.
+            </p>
+        </div>
+    </div>
 </div>
+
+<!-- slide related product -->
+
+<div class="container" style="position: relative;">
+    <h3 class="text-center mt-5 pt-5 mb-3"><strong>Related products</strong></h3>
+    <div class="slide-related-product">
+        <div class="col-md-3 my-4 product" *ngFor="let product of relatedProducts">
+            <!-- Modal -->
+            <div class="img-product">
+                <div class="status p-2">
+                    <span class="float-left badge badge-pill badge-success" *ngIf="product.new">New</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.salePrice>0 && product.qty!=0">Sale</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty==0">Sold out</span>
+                </div>
+                <img src="{{product.urlImage[0]}}" alt="">
+                <div class="form-inline d-flex justify-content-between p-0  features ">
+                    <button class="btn btn-transparent">add to cart</button>
+                    <button class="btn btn-transparent" data-toggle="modal" data-target="#quickview" (click)="getDetails(product.id)"> &#9974;</button>
+                </div>
+
+            </div>
+            <div class="info-product">
+                <h5 class="my-2">
+                    <a [routerLink]="['/products/',product.id]" class="name">
+                        {{product.name |titlecase }}
+                    </a>
+                </h5>
+
+                <p class="star-rating">
+                    <span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                    <span>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </span>
+                </p>
+                <p class="price">{{product.price | currency}}</p>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-slide" style="right: 0;" (click)="passSlide(true)"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+    <button class="btn btn-slide" style="left: 0;" (click)="passSlide(false)"><i class="fa fa-chevron-left" aria-hidden="true"></i></button>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="quickview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document ">
+            <div class="modal-content" *ngIf="isShowQuickView ">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLongTitle "><strong>Quick view</strong></h5>
+                    <button type="button " class="close " data-dismiss="modal" aria-label="Close ">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="productCarousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li *ngFor="let img of productDetails.urlImage; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" *ngFor="let img of productDetails.urlImage; let i=index" [ngClass]="{'active': i==0}">
+                                        <img class="d-block w-100" src="{{img}}" alt="Photo + {{i}}">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3><strong>{{productDetails.name}}</strong></h3>
+                            <p>Some thing it asdjsadkajsbd bshdbshdb asjkdbjas sdsd sdsd sdbjsdb sdsd shdb asjkdbjas sdsd sdsd sdbjsdb sds</p>
+                            <p>
+                                <Strong>Price: </Strong>{{productDetails.price|currency}}</p>
+                            <div class="form-group row">
+                                <label for="quantity" class="col-sm-2 col-form-label"><strong>Quantity:
+                                        </strong></label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control ml-3" id="quantity" value="1" style="width: 70px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="my-btn"><strong>Add to cart</strong></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!-- Modal -->

@@ -6,6 +6,7 @@
     margin: 0;
     /* user-select: none; */
     border-radius: 0 !important;
+    scroll-behavior: smooth;
 }
 
 .gray {
@@ -17,7 +18,7 @@
 }
 
 .gray-orange:hover {
-    color: #f68872;
+    color: #f68872 !important;
 }
 
 strong {

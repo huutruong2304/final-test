@@ -19,6 +19,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ZoomImageComponent } from './zoom-image/zoom-image.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, '../assets/lang/','.json');
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SliceTitlePipe,
     ProductDetailComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    ZoomImageComponent
   ],
   imports: [
     BrowserModule,

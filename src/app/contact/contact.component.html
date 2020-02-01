@@ -1,17 +1,33 @@
-<div class="text-center">
-    <h1 translate>Contact us</h1>
+<div class="title">
+    <h1>Contact</h1>
 </div>
-<div class="container">
-    <form class="text-center">
-
-        <div class="form-group">
-            <!-- <label for="exampleFormControlTextarea1">Message</label> -->
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" [placeholder]="'Enter your message'|translate"></textarea>
+<div class="container my-5">
+    <form>
+        <div class="form-row">
+            <div class="col">
+                <label for="formGroupExampleInput">Name:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput">
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput2">Email:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2">
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput2">Phone Number:</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2">
+            </div>
         </div>
-        <div class="form-group">
-            <button class="btn btn-primary m-2" translate>Send</button>
-            <button class="btn btn-danger m-2" translate>Cancel</button>
+        <div class="form-row my-3">
+            <div class="col">
+                <label for="formGroupExampleInput">Message</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="15"></textarea>
+            </div>
         </div>
     </form>
+    <button class="submit-btn my-3" type="submit">Post Comment</button>
+</div>
 
+<div class="container-fluid p-0">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125352.71708269717!2d106.6721741379242!3d10.942783371169464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2sUniversity%20of%20Information%20Technology%20VNU-HCM!5e0!3m2!1sen!2s!4v1580567792134!5m2!1sen!2s"
+        frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 </div>
