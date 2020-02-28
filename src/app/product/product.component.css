@@ -1,5 +1,5 @@
 .header {
-    padding: 60px 0 70px;
+    padding: 60px 0 50px;
 }
 
 h1 {
@@ -140,8 +140,6 @@ ul li a {
     opacity: 0.3;
 }
 
-.price {
+.btn-transparent {
     color: #999999;
-    margin: 0;
-    opacity: 1;
 }

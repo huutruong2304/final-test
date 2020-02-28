@@ -31,11 +31,11 @@ strong {
     font-size: 16px;
 }
 
-.orange {
+.btn-transparent:hover {
     color: #f68872 !important;
 }
 
-.btn-transparent:hover {
+.orange {
     color: #f68872 !important;
 }
 
@@ -62,4 +62,18 @@ button:focus {
 
 input {
     box-shadow: none !important;
+}
+
+.price {
+    color: #999999;
+    margin: 0;
+    opacity: 1;
+}
+
+.usual-price {
+    text-decoration: line-through;
+}
+
+input.ng-touched.ng-invalid {
+    border: 1px solid #dc3545 !important;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GetDataService } from '../services/get-data.service'
+import { ApiProductService } from '../services/api-product.service'
 import { Product } from '../interface/product'
 
 @Component({
@@ -13,9 +13,9 @@ export class HomeComponent implements OnInit {
   productDetails: Product;
 
   products: Array<any>;
-  constructor(private getDataService: GetDataService) {
+  constructor(private apiProductService: ApiProductService) {
     this.isShowQuickView = false;
-    this.getDataService.getAll().subscribe((products) => {
+    this.apiProductService.getAllProducts().subscribe((products) => {
       this.products = products;
     });
   }
@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
 
   getDetails(id: number) {
     this.isShowQuickView = false;
-    this.getDataService.getById(id).subscribe(product => {
+    this.apiProductService.getProductById(id).subscribe((product) => {
       this.productDetails = product;
       this.isShowQuickView = true;
-      console.log(this.isShowQuickView);
+      // console.log(this.isShowQuickView);
     })
   }
 

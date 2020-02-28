@@ -31,6 +31,8 @@ export class AppComponent {
         console.log(event.error);
       }
     });
+  //  this.getDataService.getAll().subscribe(console.log);
+
   }
 
   switchLanguage(language: string) {

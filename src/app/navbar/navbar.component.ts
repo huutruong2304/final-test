@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
+import { Product } from '../interface/product';
+import { ApiUserService } from '../services/api-user.service';
+import { of } from 'rxjs';
+
 
 @Component({
   selector: 'app-navbar',
@@ -6,23 +11,102 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  formSignUp: FormGroup;
+  formSignIn: FormGroup;
+
+
+  isLoggedIn: boolean;
+  isSignedUp: boolean = false;
   isShowLogin: boolean;
-  products: Array<any>;
-  constructor() {
-    this.products = [
-      { id: 1, name: "Túi", qty: 1, urlImage: "https://cdn.shopify.com/s/files/1/0042/9313/2377/products/5a_09e8d505-63fb-4ae1-b2ab-efbe51967ebe.jpg?v=1536938698", price: 20000 },
-      { id: 2, name: "Túi 2", qty: 1, urlImage: "https://cdn.shopify.com/s/files/1/0042/9313/2377/products/5a_09e8d505-63fb-4ae1-b2ab-efbe51967ebe.jpg?v=1536938698", price: 20000 },
-      { id: 3, name: "Túi 3", qty: 1, urlImage: "https://cdn.shopify.com/s/files/1/0042/9313/2377/products/5a_09e8d505-63fb-4ae1-b2ab-efbe51967ebe.jpg?v=1536938698", price: 20000 },
-      { id: 4, name: "Túi 4", qty: 1, urlImage: "https://cdn.shopify.com/s/files/1/0042/9313/2377/products/5a_09e8d505-63fb-4ae1-b2ab-efbe51967ebe.jpg?v=1536938698", price: 30000 }
-    ];
-    this.isShowLogin = false;
+  products: Product[] = [];
 
-  }
 
-  showLoginTable(){
-    this.isShowLogin=!this.isShowLogin;
-  }
+  constructor(private formBuilder: FormBuilder,private apiUserService: ApiUserService) { }
+
   ngOnInit() {
+    this.isLoggedIn = this.apiUserService.isLoggedIn;
+    this.isShowLogin = false;
+    //form đăng kí
+    this.formSignUp = this.formBuilder.group({
+      email: ['',
+        [
+          Validators.email,
+          Validators.required
+        ]
+      ],
+      username: ['',
+        [
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.required
+        ]
+      ],
+      password: ['',
+        [
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.required
+        ]
+      ]
+    });
+
+
+    //form đăng nhập
+    this.formSignIn = this.formBuilder.group({
+      email: ['',
+        [
+          Validators.email,
+          Validators.required
+        ]
+      ],
+      password: ['',
+        [
+          Validators.minLength(6),
+          Validators.maxLength(20),
+          Validators.required
+        ]
+      ]
+    })
+
   }
+
+  showLoginTable() {
+    this.isShowLogin = !this.isShowLogin;
+  }
+
+  signUp() {
+    console.log('signup');
+      this.apiUserService.signUp(this.formSignUp.value).subscribe(()=>{
+        this.isSignedUp = !this.isSignedUp;
+      });
+  }
+
+  signIn() {
+      this.apiUserService.signIn(this.formSignIn.value).subscribe(()=>{
+        this.showLoginTable();
+        this.isLoggedIn =this.apiUserService.isLoggedIn;
+      });
+    
+  }
+
+  signOut(){
+    this.apiUserService.doLogout();
+    this.showLoginTable();
+    this.isLoggedIn =this.apiUserService.isLoggedIn;
+  }
+
+
+
 
 }
+// function passwordValidator(formControl:FormControl){
+//     if(formControl.value.length<6 || formControl.value.length>20){
+//       return {length: true};
+//     }
+
+//     // if(formControl.value.match( /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/)===''){
+//     //   return {match: true}
+//     // }
+
+//     return null
+// }

@@ -6,7 +6,7 @@
         </div>
         <div class="col-8 form-inline">
             <div class="align-middle px-5">
-                <p class="gray">Showing: 1-8 Of 14</p>
+                <p class="gray">Showing: {{this.products.length}} of {{this.productRepo.length}}</p>
             </div>
             <div class="align-middle px-5">
                 <p class="filter" (click)="showFilterTable()"><strong>Filter</strong><i class="fa fa-angle-down px-1" aria-hidden="true"></i></p>
@@ -15,9 +15,10 @@
                 <p>
                     <strong class="pr-3">Sort by:</strong>
                     <span>
-                        <select class="form-control form-control-sm">
-                            <option style="border: none;">Small select</option>
-                            <option>Big select</option>
+                        <select class="form-control form-control-sm border-0" (change)="changeSortBy($event.target.value)">
+                            <option value="none">Default</option>
+                            <option value="1">Price: Low to High</option>
+                            <option value="2">Price: High to Low</option>
                         </select>
                     </span>
                 </p>
@@ -25,28 +26,21 @@
 
         </div>
     </div>
-    <div class="row d-flex justify-content-center text-center py-3" *ngIf="isShowFilter" style="margin-top: 70px;">
+    <div class="row d-flex justify-content-center text-center py-3" *ngIf="isShowFilter">
+        <!-- <div class="btn btn-transparent w-100 text-center py-3">
+            <h5>Reset all filter</h5>
+        </div> -->
         <div class="col-md-3">
             <ul class="list-group">
                 <li class="list-group-item">
                     <h4 class="list-title">Category</h4>
                 </li>
-                <li class="list-group-item">
-                    <a href="#">Accessories</a>
+                <li class="list-group-item" *ngFor="let cate of categories">
+                    <button (click)="getFilter({categoryId : cate.id})" class="btn btn-transparent">{{cate.name}}</button>
                 </li>
-                <li class="list-group-item">
-                    <a href="#">Fashion</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">Funiture</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">Decor</a>
-                </li>
-
             </ul>
         </div>
-        <div class="col-md-3 color">
+        <!-- <div class="col-md-3 color">
             <ul class="list-group">
                 <li class="list-group-item">
                     <h4 class="list-title">Color</h4>
@@ -61,28 +55,24 @@
                     <a href="#"><i class="fa fa-circle" aria-hidden="true" style="color: blue;"></i> Blue</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <div class="col-md-3">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <h4 class="list-title">Size</h4>
+                    <h4 class="list-title">Discount</h4>
                 </li>
                 <li class="list-group-item">
-                    <a href="#">m</a>
+                    <button (click)="getFilter({discount:80})" class="btn btn-transparent">>80%</button>
                 </li>
                 <li class="list-group-item">
-                    <a href="#">s</a>
+                    <button (click)="getFilter({discount :50})" class="btn btn-transparent">>50%</button>
                 </li>
                 <li class="list-group-item">
-                    <a href="#">xs</a>
+                    <button (click)="getFilter({discount:30})" class="btn btn-transparent">>30%</button>
                 </li>
-                <li class="list-group-item">
-                    <a href="#">XL</a>
-                </li>
-
             </ul>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
             <ul class="list-group">
                 <li class="list-group-item">
                     <h4 class="list-title">Price</h4>
@@ -98,20 +88,23 @@
                 </li>
 
             </ul>
-        </div>
+        </div> -->
     </div>
 </div>
 
 <div class="container d-flex flex-wrap">
+    <div class="text-center gray w-100" *ngIf="this.products.length===0">
+        <h5>*No product available</h5>
+    </div>
     <div class="col-md-3 my-4 product" *ngFor="let product of products">
         <!-- Modal -->
         <div class="img-product">
             <div class="status p-2">
                 <span class="float-left badge badge-pill badge-success" *ngIf="product.new">New</span>
-                <span class="float-right badge badge-pill badge-danger" *ngIf="product.salePrice>0 && product.qty!=0">Sale</span>
-                <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty==0">Sold out</span>
+                <span class="float-right badge badge-pill badge-danger" *ngIf="product.discount>0 && product.qty!==0">Sale</span>
+                <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty===0">Sold out</span>
             </div>
-            <img src="{{product.urlImage[0]}}" alt="">
+            <img src="{{product.imageArr[0]}}" alt="">
             <div class="form-inline d-flex justify-content-between p-0  features ">
                 <button class="btn btn-transparent">add to cart</button>
                 <button class="btn btn-transparent" data-toggle="modal" data-target="#quickview" (click)="getDetails(product.id)"> &#9974;</button>
@@ -142,7 +135,10 @@
                     <i class="fa fa-star" aria-hidden="true"></i>
                 </span>
             </p>
-            <p class="price">{{product.price | currency}}</p>
+            <p class="price">
+                <span *ngIf="product.discount!==0" class="mr-2">{{product.discountPrice | currency}}</span>
+                <span [ngClass]="{'usual-price': product.discount!==0}"> {{product.usualPrice | currency}}</span>
+            </p>
         </div>
     </div>
     <div class="modal-body text-center" *ngIf="isShowSpinner">
@@ -167,12 +163,14 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
+
+
                             <div id="productCarousel" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li *ngFor="let img of productDetails.urlImage; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
+                                    <li *ngFor="let img of productDetails.imageArr; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
                                 </ol>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item" *ngFor="let img of productDetails.urlImage; let i=index" [ngClass]="{'active': i==0}">
+                                    <div class="carousel-item" *ngFor="let img of productDetails.imageArr; let i=index" [ngClass]="{'active': i==0}">
                                         <img class="d-block w-100" src="{{img}}" alt="Photo + {{i}}">
                                     </div>
                                 </div>
@@ -185,12 +183,16 @@
                                     <span class="sr-only">Next</span>
                                 </a>
                             </div>
+
                         </div>
                         <div class="col-md-6">
                             <h3><strong>{{productDetails.name}}</strong></h3>
                             <p>Some thing it asdjsadkajsbd bshdbshdb asjkdbjas sdsd sdsd sdbjsdb sdsd shdb asjkdbjas sdsd sdsd sdbjsdb sds</p>
-                            <p>
-                                <Strong>Price: </Strong>{{productDetails.price|currency}}</p>
+                            <p class="price">
+                                <span class="text-dark">Price: </span>
+                                <span *ngIf="productDetails.discount!==0" class="mr-2">{{productDetails.discountPrice | currency}}</span>
+                                <span [ngClass]="{'usual-price': productDetails.discount!==0}"> {{productDetails.usualPrice | currency}}</span>
+                            </p>
                             <div class="form-group row">
                                 <label for="quantity" class="col-sm-2 col-form-label"><strong>Quantity:
                                         </strong></label>

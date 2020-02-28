@@ -1,9 +1,16 @@
+import { Category } from './category';
+
 export interface Product {
     id: number,
     name:string,
-    urlImage: Array<string>,
-    price: string,
-    priceSale: string,
-    new:boolean,
-    qty: number
+    urlImage: string,
+    imageArr: Array<string>,
+    usualPrice: number,
+    discount: number,
+    discountPrice:number,
+    description: string,
+    qty: number,
+    category: Category,
+    createdAt: Date,
+    new: boolean
 }

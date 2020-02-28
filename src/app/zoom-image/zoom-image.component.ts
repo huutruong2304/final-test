@@ -8,19 +8,20 @@ import { of, fromEvent } from 'rxjs';
   styleUrls: ['./zoom-image.component.css']
 })
 export class ZoomImageComponent implements OnInit {
-  @Input() urlImages: Array<string>;
+  @Input() imageArr: Array<string>;
   private zoomValue: number;
   private heightFrame: number = 100;// unit: px0
   currentIndex: number = 0;
   imageEle: HTMLElement;
   constructor() {
   }
+  // imageArr
 
   ngOnInit() {
 
   }
   ngDoCheck(): void {
-    this.imageEle.style.backgroundImage = `url('${this.urlImages?this.urlImages[this.currentIndex]:''}')`;
+    this.imageEle.style.backgroundImage = `url('${this.imageArr?this.imageArr[this.currentIndex]:''}')`;
   }
 
   ngOnChanges(): void {
@@ -30,9 +31,7 @@ export class ZoomImageComponent implements OnInit {
       this.zoomValue = this.imageEle.clientHeight / this.heightFrame;
       // console.log(this.zoomValue);
       // this.imageEle.setAttribute("style", `background-image:url("${this.product.urlImage}");`);
-      console.log('asd');
-      this.imageEle.style.backgroundImage = `url('${this.urlImages?this.urlImages[this.currentIndex]:''}')`;
-      console.log('asd');
+      this.imageEle.style.backgroundImage = `url('${this.imageArr?this.imageArr[this.currentIndex]:''}')`;
       
       fromEvent(this.imageEle, "mousemove").subscribe((x: MouseEvent) => {
         this.imageEle.style.backgroundSize = this.zoomValue * 100 + "%";
@@ -76,7 +75,7 @@ export class ZoomImageComponent implements OnInit {
   chooseImage(index: number) {
     this.currentIndex = index;
     // console.log(this.currentIndex);
-    // this.imageEle.style.backgroundImage = `url('${this.urlImages[this.currentIndex]}')`;
+    // this.imageEle.style.backgroundImage = `url('${this.imageArr[this.currentIndex]}')`;
 
   }
 

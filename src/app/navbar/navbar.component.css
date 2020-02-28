@@ -128,6 +128,20 @@ hr {
     /* border: 1px solid #999999; */
 }
 
+.header-user .list-group-item {
+    cursor: pointer;
+    color: black;
+    transition: color 0.3s;
+}
+
+.header-user .list-group-item:hover {
+    color: #f68872 !important;
+}
+
+.header-user .list-group-item .btn {
+    font-size: 15px !important;
+}
+
 .header-user .nav-link {
     border: 1px solid transparent;
 }

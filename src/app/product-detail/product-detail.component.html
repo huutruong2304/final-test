@@ -7,14 +7,14 @@
     </div>
     <div class="row">
         <div class="col-md-6 px-0 py-2">
-            <app-zoom-image [urlImages]="productDetails?.urlImage"></app-zoom-image>
+            <app-zoom-image [imageArr]="productDetails?.imageArr"></app-zoom-image>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-5 infoProduct">
             <h3> <strong class="text-capitalize m-0">{{productDetails?.name}}</strong></h3>
             <small class="gray">SKU: #{{productDetails?.id}}</small>
             <h5 class="py-2">
-                <span>${{productDetails?.price}}</span>
+                <span>${{productDetails?.usualPrice}}</span>
                 <span class="ml-5" *ngIf="productDetails?.qty===0"><i class="fa fa-times-circle" style="color: #FF4040;"></i><small class="p-1">Out of stock</small></span>
                 <span class="ml-5" *ngIf="productDetails?.qty!==0"><i class="fa fa-check-circle" style="color: #86c178;"></i><small class="p-1">Many in stock</small></span>
             </h5>
@@ -60,7 +60,7 @@
                 at the bottom to accommodate all body types. Rivets at all stress points
             </p>
             <div class="text-center">
-                <img class="py-2 w-25" src="{{productDetails?.urlImage[0]}}" alt="Photo">
+                <img class="py-2 w-25" src="{{productDetails?.imageArr[0]}}" alt="Photo">
             </div>
             <p>is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content
                 here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their
@@ -93,10 +93,10 @@
             <div class="img-product">
                 <div class="status p-2">
                     <span class="float-left badge badge-pill badge-success" *ngIf="product.new">New</span>
-                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.salePrice>0 && product.qty!=0">Sale</span>
-                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty==0">Sold out</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.discount>0 && product.qty!==0">Sale</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty===0">Sold out</span>
                 </div>
-                <img src="{{product.urlImage[0]}}" alt="">
+                <img src="{{product.imageArr[0]}}" alt="">
                 <div class="form-inline d-flex justify-content-between p-0  features ">
                     <button class="btn btn-transparent">add to cart</button>
                     <button class="btn btn-transparent" data-toggle="modal" data-target="#quickview" (click)="getDetails(product.id)"> &#9974;</button>
@@ -106,9 +106,10 @@
             <div class="info-product">
                 <h5 class="my-2">
                     <a [routerLink]="['/products/',product.id]" class="name">
-                        {{product.name |titlecase }}
-                    </a>
+                    {{product.name |titlecase }}
+                </a>
                 </h5>
+
 
                 <p class="star-rating">
                     <span>
@@ -127,7 +128,10 @@
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </span>
                 </p>
-                <p class="price">{{product.price | currency}}</p>
+                <p class="price">
+                    <span *ngIf="product.discount!==0" class="mr-2">{{product.discountPrice | currency}}</span>
+                    <span [ngClass]="{'usual-price': product.discount!==0}"> {{product.usualPrice | currency}}</span>
+                </p>
             </div>
         </div>
     </div>
@@ -152,10 +156,10 @@
                         <div class="col-md-6">
                             <div id="productCarousel" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li *ngFor="let img of productDetails.urlImage; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
+                                    <li *ngFor="let img of productDetails?.imageArr; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
                                 </ol>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item" *ngFor="let img of productDetails.urlImage; let i=index" [ngClass]="{'active': i==0}">
+                                    <div class="carousel-item" *ngFor="let img of productDetails?.imageArr; let i=index" [ngClass]="{'active': i==0}">
                                         <img class="d-block w-100" src="{{img}}" alt="Photo + {{i}}">
                                     </div>
                                 </div>
@@ -170,10 +174,13 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <h3><strong>{{productDetails.name}}</strong></h3>
+                            <h3><strong>{{productDetails?.name}}</strong></h3>
                             <p>Some thing it asdjsadkajsbd bshdbshdb asjkdbjas sdsd sdsd sdbjsdb sdsd shdb asjkdbjas sdsd sdsd sdbjsdb sds</p>
-                            <p>
-                                <Strong>Price: </Strong>{{productDetails.price|currency}}</p>
+                            <p class="price">
+                                <span class="text-dark">Price: </span>
+                                <span *ngIf="productDetails?.discount!==0" class="mr-2">{{productDetails?.discountPrice | currency}}</span>
+                                <span [ngClass]="{'usual-price': productDetails?.discount!==0}"> {{productDetails?.usualPrice | currency}}</span>
+                            </p>
                             <div class="form-group row">
                                 <label for="quantity" class="col-sm-2 col-form-label"><strong>Quantity:
                                         </strong></label>

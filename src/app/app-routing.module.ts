@@ -5,14 +5,14 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { AuthGuard } from './auth/auth.guard';
 
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
   {path:'contact',component:ContactComponent},
-  {path:'products',component:ProductComponent},
+  {path:'products',component:ProductComponent,canActivate:[AuthGuard]},
   {path:'products/:id',component:ProductDetailComponent},
-  {path:'login',component:LoginComponent},
   {path:'**',component:HomeComponent}
 ];
 

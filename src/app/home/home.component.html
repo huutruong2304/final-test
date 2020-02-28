@@ -76,10 +76,10 @@
             <div class="img-product">
                 <div class="status p-2">
                     <span class="float-left badge badge-pill badge-success" *ngIf="product.new">New</span>
-                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.salePrice>0 && product.qty!=0">Sale</span>
-                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty==0">Sold out</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.discount>0 && product.qty!==0">Sale</span>
+                    <span class="float-right badge badge-pill badge-danger" *ngIf="product.qty===0">Sold out</span>
                 </div>
-                <img src="{{product.urlImage[0]}}" alt="">
+                <img src="{{product.imageArr[0]}}" alt="">
                 <div class="form-inline d-flex justify-content-between p-0  features ">
                     <button class="btn btn-transparent">add to cart</button>
                     <button class="btn btn-transparent" data-toggle="modal" data-target="#quickview" (click)="getDetails(product.id)"> &#9974;</button>
@@ -110,7 +110,10 @@
                         <i class="fa fa-star" aria-hidden="true"></i>
                     </span>
                 </p>
-                <p class="price">{{product.price | currency}}</p>
+                <p class="price">
+                    <span *ngIf="product.discount!==0" class="mr-2">{{product.discountPrice | currency}}</span>
+                    <span [ngClass]="{'usual-price': product.discount!==0}"> {{product.usualPrice | currency}}</span>
+                </p>
             </div>
         </div>
 
@@ -133,10 +136,10 @@
                             <div class="col-md-6">
                                 <div id="productCarousel" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                        <li *ngFor="let img of productDetails.urlImage; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
+                                        <li *ngFor="let img of productDetails.imageArr; let i=index" data-target="#carouselExampleIndicators" attr.data-slide-to="{{i}}" [ngClass]="{'active': i==0}"></li>
                                     </ol>
                                     <div class="carousel-inner">
-                                        <div class="carousel-item" *ngFor="let img of productDetails.urlImage; let i=index" [ngClass]="{'active': i==0}">
+                                        <div class="carousel-item" *ngFor="let img of productDetails.imageArr; let i=index" [ngClass]="{'active': i==0}">
                                             <img class="d-block w-100" src="{{img}}" alt="Photo + {{i}}">
                                         </div>
                                     </div>
@@ -153,8 +156,11 @@
                             <div class="col-md-6">
                                 <h3><strong>{{productDetails.name}}</strong></h3>
                                 <p>Some thing it asdjsadkajsbd bshdbshdb asjkdbjas sdsd sdsd sdbjsdb sdsd shdb asjkdbjas sdsd sdsd sdbjsdb sds</p>
-                                <p>
-                                    <Strong>Price: </Strong>{{productDetails.price|currency}}</p>
+                                <p class="price">
+                                    <span class="text-dark">Price: </span>
+                                    <span *ngIf="productDetails.discount!==0" class="mr-2">{{productDetails.discountPrice | currency}}</span>
+                                    <span [ngClass]="{'usual-price': productDetails.discount!==0}"> {{productDetails.usualPrice | currency}}</span>
+                                </p>
                                 <div class="form-group row">
                                     <label for="quantity" class="col-sm-2 col-form-label"><strong>Quantity:
                                             </strong></label>
