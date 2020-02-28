@@ -8,7 +8,7 @@ import { Product } from '../interface/product'
   providedIn: 'root'
 })
 export class ApiProductService {
-  private readonly url: string = 'http://localhost:3000/products';
+  private readonly url: string = 'https://server-final-test.herokuapp.com/products';
   constructor(private http: HttpClient) { }
   // private data: Array<any>;
   private getProducts() {

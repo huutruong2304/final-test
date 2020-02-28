@@ -7,7 +7,7 @@ import { Category } from '../interface/category';
   providedIn: 'root'
 })
 export class ApiCategoryService {
-  private readonly url:string = 'http://localhost:3000/categories';
+  private readonly url:string = 'https://server-final-test.herokuapp.com/categories';
   constructor(private http:HttpClient) { 
   }
 

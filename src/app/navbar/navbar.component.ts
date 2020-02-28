@@ -75,7 +75,6 @@ export class NavbarComponent implements OnInit {
   }
 
   signUp() {
-    console.log('signup');
       this.apiUserService.signUp(this.formSignUp.value).subscribe(()=>{
         this.isSignedUp = !this.isSignedUp;
       });

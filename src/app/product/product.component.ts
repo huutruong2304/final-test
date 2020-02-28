@@ -56,24 +56,36 @@ export class ProductComponent implements OnInit {
     })
   }
 
-
-  getFilter(getFilterProduct:GetFilterProduct):Product[]{
-    const {categoryId,discount} = getFilterProduct;
-
-    this.products = [].concat(this.productRepo);
-    
-    if(categoryId){
-      this.products = this.products.filter(product => product.category.id === categoryId);
-    }
-
-    if(discount){
-      this.products = this.products.filter(product => product.discount >= discount);
-    }
-
+  getCategoryFilter(id:number){
+    this.products = this.productRepo.filter(product => product.category.id === id);
     this.showFilterTable();
-    
-    return this.products;
   }
+
+  getDiscountFilter(min:number,max:number){
+    this.products = this.productRepo.filter(product =>( product.discount >=min && product.discount<=max));
+    this.showFilterTable();
+  }
+
+  resetFilter(){
+    this.products = [].concat(this.productRepo);
+    this.showFilterTable();
+  }
+
+  // getFilter(getFilterProduct:GetFilterProduct){
+  //   const {categoryId,discount} = getFilterProduct;
+
+  //   this.products = [].concat(this.productRepo);
+    
+  //   if(categoryId){
+  //     this.products = this.products.filter(product => product.category.id === categoryId);
+  //   }
+
+  //   if(discount){
+  //     this.products = this.products.filter(product => product.discount >= discount);
+  //   }
+
+  //   this.showFilterTable();
+  // }
 
   changeSortBy(value: string) {
     switch (value) {

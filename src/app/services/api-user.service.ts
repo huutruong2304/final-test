@@ -9,7 +9,7 @@ import { tap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiUserService {
-  private readonly url: string = 'http://localhost:3000/users';
+  private readonly url: string = 'https://server-final-test.herokuapp.com/users';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   curentUser = {}; 
   
